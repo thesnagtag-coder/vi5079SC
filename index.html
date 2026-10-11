@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>The Ventilation &amp; Indoor Air Check - Beneath the Surface by The Snag Tag</title>
+<meta name="description" content="8 real ventilation and indoor air checks for home buyers or home owners: extractor fans, condensation, humidity and radon. Free, 5 minutes, no signup - from The Snag Tag.">
+<style>
+:root{
+  --accent:#1D4ED8; --accent-dark:#2D5B9A; --accent-rgb:29,78,216;
+}
+body[data-mode="light"], body{
+  --bg:#F7FAFD; --surface:#FFFFFF; --surface-2:#E8F0FA; --tile:#F7FAFD;
+  --ink:#16243F; --ink-mid:#44546F; --ink-soft:#6B7A93; --line:#C9D6E8;
+  --navy:#16243F; --navy-2:#1E3154;
+  --safe:#2E7D4F; --safe-bg:#E7F5EC;
+  --flag:#A15C00; --flag-bg:#FFF3E0;
+  --grid:rgba(45,91,154,.06);
+}
+body[data-mode="dark"]{
+  --bg:#0F1A2C; --surface:#15233A; --surface-2:#1C3150; --tile:#122036;
+  --ink:#E6EEF9; --ink-mid:#B8C6DB; --ink-soft:#8C9BB2; --line:#2F4466;
+  --navy:#0B1424; --navy-2:#0F1A2C;
+  --safe:#81C995; --safe-bg:#1B3326;
+  --flag:#FFB74D; --flag-bg:#3A2C17;
+  --grid:rgba(140,180,230,.06);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px;
+  font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+  transition:background .25s,color .25s;
+}
+h1,h2,h3,h4{margin:0}
+.mono{font-family:ui-monospace,"SFMono-Regular","Cascadia Mono","Roboto Mono",Consolas,monospace}
+::selection{background:rgba(var(--accent-rgb),.35)}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+.topbar{
+  background:var(--navy); color:#fff; border-bottom:3px solid var(--accent);
+  padding:12px 18px; display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:20;
+}
+.topbar-left{display:flex; align-items:center; gap:10px}
+.topbar-logo{width:32px;height:32px;border-radius:6px;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;flex:none}
+.topbar-logo svg{width:18px;height:18px}
+.topbar-name{font-weight:700; font-size:16px; letter-spacing:-.2px}
+.topbar-name span{color:#93C5FD}
+.topbar-sub{font-size:11px; color:rgba(255,255,255,.65); font-weight:500; letter-spacing:.06em; text-transform:uppercase}
+.topbar-tools{display:flex; gap:6px}
+.tool-btn{background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.2); color:#fff; border-radius:6px; padding:7px 10px; font-size:13px; cursor:pointer; font-weight:600; display:flex; align-items:center; gap:5px}
+.tool-btn:hover{background:rgba(255,255,255,.17)}
+
+.progress-wrap{position:sticky; top:59px; z-index:19; background:var(--bg); padding:10px 18px 8px; border-bottom:1px solid var(--line)}
+.progress-track{height:6px; background:var(--surface-2); border-radius:99px; overflow:hidden; max-width:640px; margin:0 auto}
+.progress-fill{height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-dark)); border-radius:99px; transition:width .35s ease; width:0%}
+.progress-label{max-width:640px; margin:6px auto 0; font-size:12px; color:var(--ink-soft); font-weight:600; display:flex; justify-content:space-between}
+
+main{max-width:640px; margin:0 auto; padding:28px 20px 90px}
+.screen{display:none; animation:fade .35s ease}
+.screen.active{display:block}
+@keyframes fade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+
+.hook-badge{display:inline-flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--line); color:var(--accent-dark); font-weight:700; font-size:12.5px; padding:5px 12px; border-radius:99px; margin-bottom:18px}
+body[data-mode="dark"] .hook-badge{color:#8CB4E6}
+.hook h1{font-size:clamp(1.7rem,6vw,2.3rem); line-height:1.15; margin-bottom:14px}
+.hook h1 em{font-style:normal; color:var(--accent)}
+.hook p.lede{font-size:1.05rem; color:var(--ink-mid); margin-bottom:22px}
+.hook-facts{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:26px}
+.hook-fact{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 10px; text-align:center}
+.hook-fact .n{font-size:1.4rem; font-weight:700; color:var(--accent)}
+.hook-fact .t{font-size:11.5px; color:var(--ink-soft); font-weight:600; margin-top:2px}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  border-radius:10px; padding:15px 22px; font-size:16px; font-weight:700; cursor:pointer;
+  border:none; width:100%; text-align:center; text-decoration:none;
+}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent-dark)); color:#fff; box-shadow:0 4px 14px rgba(var(--accent-rgb),.3)}
+.btn-primary:hover{filter:brightness(1.07)}
+.btn-ghost{background:var(--surface); color:var(--ink); border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent)}
+.hint-row{display:flex; align-items:center; gap:8px; margin-top:14px; font-size:13px; color:var(--ink-soft); justify-content:center; text-align:center}
+
+.choose-card{background:var(--surface); border:1.5px solid var(--line); border-radius:12px; padding:18px 18px; margin-bottom:12px; cursor:pointer; transition:border-color .15s}
+.choose-card:hover{border-color:var(--accent)}
+.choose-card .cc-label{font-size:1.1rem; font-weight:700; margin-bottom:3px}
+.choose-card .cc-range{font-size:13px; color:var(--ink-soft); font-weight:600}
+
+.zone-chip{display:inline-flex; align-items:center; gap:6px; background:var(--surface); border:1px solid var(--line); color:var(--ink-mid); font-weight:700; font-size:11.5px; text-transform:uppercase; letter-spacing:.06em; padding:5px 11px; border-radius:99px; margin-bottom:16px}
+.zone-chip .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+.check-card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:24px 22px; box-shadow:0 2px 12px rgba(22,36,63,.06)}
+.check-card .verb{font-size:12.5px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:.08em; margin-bottom:8px}
+.check-card h2{font-size:1.35rem; line-height:1.3; margin-bottom:10px}
+.check-card .prompt{font-size:1rem; color:var(--ink-mid); margin-bottom:20px}
+.check-card .prompt strong{color:var(--ink)}
+.opts{display:flex; flex-direction:column; gap:10px; margin-bottom:4px}
+.opt{
+  display:flex; align-items:center; gap:12px; background:var(--tile); border:1.5px solid var(--line);
+  border-radius:10px; padding:14px 16px; cursor:pointer; font-size:15px; font-weight:600; color:var(--ink);
+  transition:border-color .15s, background .15s;
+}
+.opt:hover{border-color:var(--accent)}
+.opt .ic{width:22px;height:22px;border-radius:50%;border:2px solid var(--line); flex:none; display:flex;align-items:center;justify-content:center; font-size:13px; font-weight:800; color:transparent}
+.opt.selected{border-color:var(--accent-dark)}
+.opt.selected.safe{background:var(--safe-bg); border-color:var(--safe)}
+.opt.selected.safe .ic{border-color:var(--safe); color:var(--safe)}
+.opt.selected.flag{background:var(--flag-bg); border-color:var(--flag)}
+.opt.selected.flag .ic{border-color:var(--flag); color:var(--flag)}
+.change-hint{font-size:12.5px; color:var(--ink-soft); margin:10px 0 0}
+
+.reveal{margin-top:18px; border-radius:10px; padding:16px 18px; border-left:4px solid var(--accent-dark); background:var(--surface-2); display:none}
+.reveal.show{display:block; animation:fade .3s ease}
+.reveal .rk{font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-dark); margin-bottom:6px}
+.reveal.good{border-left-color:var(--safe); background:var(--safe-bg)}
+.reveal.good .rk{color:var(--safe)}
+.reveal.bad{border-left-color:var(--flag); background:var(--flag-bg)}
+.reveal.bad .rk{color:var(--flag)}
+.reveal p{margin:0 0 8px; font-size:14.5px; color:var(--ink-mid)}
+.reveal p:last-child{margin-bottom:0}
+.reveal .src{font-size:12.5px; color:var(--ink-soft); font-style:italic}
+
+.nav-row{display:flex; gap:10px; margin-top:22px}
+.nav-row .btn{flex:1}
+.nav-back{background:transparent; color:var(--ink-soft); border:none; font-size:13px; font-weight:600; cursor:pointer; padding:8px; margin-top:10px; width:100%; text-align:center}
+
+.result-head{text-align:center; margin-bottom:24px}
+.result-head .kicker{font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft)}
+.result-head h1{font-size:1.8rem; margin:8px 0 4px}
+.result-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:22px 0 26px}
+.rstat{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px 8px; text-align:center}
+.rstat .n{font-size:1.9rem; font-weight:700}
+.rstat.total .n{color:var(--ink)}
+.rstat.safe .n{color:var(--safe)}
+.rstat.flag .n{color:var(--flag)}
+.rstat .t{font-size:11.5px; color:var(--ink-soft); font-weight:600; margin-top:2px}
+
+.zone-bars{display:flex; flex-direction:column; gap:10px; margin-bottom:26px}
+.zbar-row{display:flex; align-items:center; gap:10px}
+.zbar-label{width:132px; flex:none; font-size:12.5px; font-weight:600; color:var(--ink-mid); overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.zbar-track{flex:1; height:9px; background:var(--surface-2); border-radius:99px; overflow:hidden}
+.zbar-fill{height:100%; border-radius:99px; background:var(--safe)}
+.zbar-fill.partial{background:var(--flag)}
+.zbar-count{width:38px; flex:none; text-align:right; font-size:12.5px; font-weight:700; color:var(--ink-soft)}
+
+.section-h{font-size:12.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-soft); margin:26px 0 12px}
+.finding{display:flex; gap:12px; padding:13px 0; border-bottom:1px solid var(--line)}
+.finding:last-child{border-bottom:none}
+.finding .fic{width:26px;height:26px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800}
+.finding.flag .fic{background:var(--flag-bg); color:var(--flag)}
+.finding.safe .fic{background:var(--safe-bg); color:var(--safe)}
+.finding .ft{font-weight:700; font-size:14.5px; margin-bottom:2px}
+.finding .fd{font-size:13.5px; color:var(--ink-soft); line-height:1.5}
+
+.quickwin{background:var(--surface); border:1.5px solid var(--accent); border-radius:14px; padding:20px; margin:8px 0 26px}
+.quickwin .qk{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--accent); margin-bottom:8px}
+.quickwin h3{font-size:1.1rem; margin-bottom:8px}
+.quickwin p{font-size:14.5px; color:var(--ink-mid); margin:0}
+
+.bridge{background:var(--navy); border-top:3px solid var(--accent); color:#fff; border-radius:14px; padding:26px 22px; margin:10px 0 20px}
+.bridge .bk{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#93C5FD}
+.bridge h3{font-size:1.4rem; margin:8px 0 12px; line-height:1.3}
+.bridge p{font-size:14.5px; color:rgba(255,255,255,.82); margin:0 0 14px}
+.bridge .still{background:rgba(255,255,255,.07); border-radius:10px; padding:14px 16px; margin:14px 0}
+.bridge .still h4{font-size:12.5px; text-transform:uppercase; letter-spacing:.04em; color:rgba(255,255,255,.6); margin-bottom:8px}
+.bridge .still ul{margin:0; padding-left:18px; font-size:13.5px; color:rgba(255,255,255,.85)}
+.bridge .still li{margin-bottom:5px}
+.bridge .btn-primary{margin-top:6px}
+.bridge .note{font-size:11.5px; color:rgba(255,255,255,.5); margin-top:10px; text-align:center}
+
+.restart-row{text-align:center; margin-top:8px}
+.restart-row button{background:none; border:none; color:var(--ink-soft); font-size:13px; font-weight:600; text-decoration:underline; cursor:pointer}
+
+.disclaimer{font-size:12px; color:var(--ink-soft); text-align:center; margin-top:30px; padding-top:18px; border-top:1px solid var(--line); line-height:1.6}
+</style>
+</head>
+<body data-mode="light">
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="topbar-logo"><svg viewBox="0 0 24 24" fill="none" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M8 13h6a1.5 1.5 0 1 0-1.5-1.5"/><path d="M8 16h8a1.5 1.5 0 1 1-1.5 1.5"/></svg></span>
+    <div>
+      <div class="topbar-name">Beneath the <span>Surface</span></div>
+      <div class="topbar-sub">by The Snag Tag &middot; Ventilation &amp; Indoor Air Check</div>
+    </div>
+  </div>
+  <div class="topbar-tools">
+    <button class="tool-btn" id="modeToggle" type="button" aria-label="Toggle dark mode">🌙</button>
+  </div>
+</div>
+
+<div class="progress-wrap" id="progressWrap" style="display:none">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label"><span id="progressText">Check 1</span><span id="progressPct">0%</span></div>
+</div>
+
+<main>
+
+  <section class="screen active" id="screen-hook">
+    <div class="hook">
+      <span class="hook-badge">🌬️ For home buyers and home owners</span>
+      <h1>Fresh air in. <em>Moisture out.</em></h1>
+      <p class="lede">Real checks, pulled from The Snag Tag's Beneath the Surface Ventilation &amp; Indoor Air tool. Fans that vent outside, humidity you can measure, radon you can test for. No signup, no scare tactics.</p>
+      <div class="hook-facts">
+        <div class="hook-fact"><div class="n">8</div><div class="t">real checks</div></div>
+        <div class="hook-fact"><div class="n">~5</div><div class="t">minutes</div></div>
+        <div class="hook-fact"><div class="n">Free</div><div class="t">to start</div></div>
+      </div>
+      <button class="btn btn-primary" id="startBtn" type="button">Start the Check &rarr;</button>
+      <div class="hint-row">Free. No account. Your answers stay on this device.</div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-choose">
+    <div class="hook">
+      <h1 style="font-size:1.6rem">Which fits you right now?</h1>
+      <p class="lede" style="margin-bottom:20px">This decides which real checks you'll see today. Pick the one that fits.</p>
+      <div class="choose-card" data-key="buyer"><div class="cc-label">I'm viewing or buying a home</div><div class="cc-range">Pre-Purchase checks</div></div>
+      <div class="choose-card" data-key="owner"><div class="cc-label">I live in or look after a home</div><div class="cc-range">Maintenance checks for owners, tenants and landlords</div></div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-check">
+    <span class="zone-chip"><span class="dot"></span><span id="chkZone">Zone</span></span>
+    <div class="check-card">
+      <div class="verb" id="chkVerb">Check</div>
+      <h2 id="chkTitle"></h2>
+      <p class="prompt" id="chkPrompt"></p>
+      <div class="opts" id="chkOpts"></div>
+      <p class="change-hint">Pick either one. You can change your answer any time before you move on.</p>
+      <div class="reveal" id="chkReveal">
+        <div class="rk" id="revealKicker">Here's what actually matters</div>
+        <p id="revealWhy"></p>
+        <p id="revealHow"></p>
+        <p class="src" id="revealSrc"></p>
+      </div>
+      <div class="nav-row" id="chkNavRow" style="display:none">
+        <button class="btn btn-primary" id="chkNextBtn" type="button">Next check &rarr;</button>
+      </div>
+    </div>
+    <button class="nav-back" id="chkBackBtn" type="button">&larr; back</button>
+    <button class="nav-back" id="chkChooseBtn" type="button" style="opacity:.65">Choose a different check</button>
+  </section>
+
+  <section class="screen" id="screen-result">
+    <div class="result-head">
+      <div class="kicker">Your Ventilation &amp; Indoor Air Check</div>
+      <h1 id="resultHeadline">Here's what you found</h1>
+    </div>
+
+    <div class="result-stats">
+      <div class="rstat total"><div class="n" id="statTotal">0</div><div class="t">checked today</div></div>
+      <div class="rstat safe"><div class="n" id="statSafe">0</div><div class="t">already sorted</div></div>
+      <div class="rstat flag"><div class="n" id="statFlag">0</div><div class="t">need attention</div></div>
+    </div>
+
+    <div class="zone-bars" id="zoneBars"></div>
+
+    <div class="section-h">What to check today</div>
+    <div id="findingsFlag"></div>
+
+    <div class="section-h">Already sorted</div>
+    <div id="findingsSafe"></div>
+
+    <div class="quickwin" id="quickwin">
+      <div class="qk">&#9889; Quick win - do this now, free</div>
+      <h3 id="qwTitle"></h3>
+      <p id="qwBody"></p>
+    </div>
+
+    <div class="bridge">
+      <div class="bk">The complete system</div>
+      <h3 id="bridgeHeadline">You found the gaps. Here's what closes them.</h3>
+      <p id="bridgeBody"></p>
+      <div class="still" id="bridgeStill">
+        <h4>Today's check opened part of the picture. Here's what's still closed:</h4>
+        <ul id="bridgeStillList"></ul>
+      </div>
+      <a class="btn btn-primary" id="proBtn" href="#" target="_blank" rel="noopener">Get the complete tool &rarr;</a>
+      <div class="note">One-time purchase. Works offline, on any device, no subscription.</div>
+      <button class="btn btn-ghost" id="saveResultsBtn" type="button" style="margin-top:12px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#fff">Not ready yet? Save my results instead &rarr;</button>
+      <div class="note">Downloads a copy of exactly what you found today, free, no email needed. Nothing here disappears, but nothing reminds you either, so keep it somewhere you'll see it.</div>
+    </div>
+
+    <div class="restart-row"><button id="restartBtn" type="button">&#8634; Start the check again</button></div>
+
+    <div class="disclaimer">This is educational general guidance from The Snag Tag, a NEBOSH &amp; OSHA trained HSE professional. It does not measure airflow, pollutants or radon, and makes no medical claims. If a CO alarm sounds, leave the home and call your emergency number. Building rules and radon levels differ between countries, so always check local requirements.</div>
+  </section>
+
+</main>
+
+<script>
+/* ============================================================
+   SET YOUR GUMROAD LINK HERE (one place, used everywhere)
+   ============================================================ */
+const GUMROAD_URL = "https://snagtag.gumroad.com/l/BTS_VentilationAir_PRO";
+
+const PRODUCTS = {
+  "buyer": {
+    "label": "Pre-Purchase",
+    "ageRange": "Viewing or buying a home",
+    "accent": "#1D4ED8",
+    "accentDark": "#2D5B9A",
+    "checks": [
+      {
+        "zone": "Wet rooms",
+        "verb": "Try it",
+        "title": "Does every bathroom and WC have a working fan or a window that opens?",
+        "prompt": "Showers make a lot of moisture. It needs <strong>a way out</strong>.",
+        "yes": "Yes, every one",
+        "no": "Not every one, or not checked",
+        "why": "Moisture from showers and baths that can't escape settles on cold surfaces as condensation.",
+        "how": "With permission, switch on each bathroom and WC fan and listen. Check windows in these rooms open. Note any room with neither.",
+        "standard": "US EPA: run the bathroom fan or open the window when showering. UK Government guidance: bathrooms need ventilation powerful enough to remove moisture from showering and bathing.",
+        "tip": "Pull the light cord or switch in a windowless WC. Many fans start with the light.",
+        "src": "Source: Beneath the Surface - Ventilation, Master Check (Bathroom and WC extraction) · EPA Mold & Moisture · UK Gov Damp & Mould"
+      },
+      {
+        "zone": "Wet rooms",
+        "verb": "Look",
+        "title": "Does the kitchen fan or cooker hood vent to the outside?",
+        "prompt": "Some hoods only filter and <strong>recirculate</strong> the air back into the room.",
+        "yes": "Yes, I found the outlet",
+        "no": "No, or not sure",
+        "why": "Fans that exhaust outdoors remove moisture and cooking pollutants from the room, rather than recirculating them.",
+        "how": "Look outside the kitchen wall or roof for a vent outlet in line with the hood or fan. No outlet usually means it recirculates. Ask the seller.",
+        "standard": "US EPA: local bathroom or kitchen fans that exhaust outdoors remove contaminants directly from the room. UK Government guidance: extractor fans linked to the outside, preferably near the hob.",
+        "tip": "Walk round the outside of the kitchen. The outlet is usually a small grille or cowl.",
+        "src": "Source: Beneath the Surface - Ventilation, Master Check (Kitchen extraction) · EPA Improving IAQ · UK Gov Damp & Mould"
+      },
+      {
+        "zone": "Signs",
+        "verb": "Look",
+        "title": "Did you see mould spots or heavy condensation?",
+        "prompt": "Check <strong>corners, window frames</strong> and behind furniture, not just open walls.",
+        "yes": "No, none seen",
+        "no": "Yes, or didn't look",
+        "why": "Mould and condensation show where moisture is not being removed. Fresh paint can hide them for a while.",
+        "how": "Look in bedroom corners, around windows, behind wardrobes and on bathroom ceilings. Photograph anything you find and ask the seller what was done about it.",
+        "standard": "US EPA: if you see condensation or moisture collecting on windows, walls or pipes, act quickly to dry the surface and reduce the moisture source. Checking behind furniture: professional practice.",
+        "tip": "Open wardrobes on outside walls and look at the back corners too.",
+        "src": "Source: Beneath the Surface - Ventilation, Master Check (Mould spots) · EPA Mold & Moisture · Professional practice"
+      },
+      {
+        "zone": "Radon",
+        "verb": "Ask",
+        "title": "Has the home been tested for radon?",
+        "prompt": "Radon can't be seen or smelled. <strong>Testing is the only way to know.</strong>",
+        "yes": "Yes, with a result",
+        "no": "No, or not sure",
+        "why": "Radon is a natural radioactive gas that can enter homes from the ground. The only way to know a home's level is to test it.",
+        "how": "Ask the seller for a radon test result and its date. Check your national radon map if one exists. If there's no test, plan one after you move in.",
+        "standard": "WHO: radon enters through cracks in floors, floor-wall junctions and gaps around pipes; measure over at least 3 months. US EPA: fix at 4 pCi/L (about 150 Bq/m³) or higher. National levels differ.",
+        "tip": "Ask for the lab report itself, not just 'it was fine'. The number and the unit matter.",
+        "src": "Source: Beneath the Surface - Ventilation, Radon Test Record · WHO Radon · EPA Radon"
+      },
+      {
+        "zone": "Wet rooms",
+        "verb": "Look",
+        "title": "Is the tumble dryer vented to the outside?",
+        "prompt": "A vented dryer blowing into the room or roof space puts <strong>moisture</strong> where it shouldn't be.",
+        "yes": "Yes, or no vented dryer",
+        "no": "No, or not sure",
+        "why": "Clothes dryers produce a lot of moisture, which should leave the home.",
+        "how": "Follow the dryer hose. It should go through an outside wall or window vent. Condenser and heat pump dryers don't need an outside vent.",
+        "standard": "US EPA: vent appliances that produce moisture, such as clothes dryers, to the outside where possible.",
+        "tip": "Check the label on the dryer door. It says whether it's a vented or condenser model.",
+        "src": "Source: Beneath the Surface - Ventilation, Master Check (Dryer vented outside) · EPA Mold & Moisture"
+      },
+      {
+        "zone": "Airflow",
+        "verb": "Look",
+        "title": "Do the windows have trickle vents, and can they open?",
+        "prompt": "Small slots in the frame that let <strong>background air</strong> in.",
+        "yes": "Yes, and they open",
+        "no": "Missing, shut, or not sure",
+        "why": "Trickle vents provide background ventilation even when windows are closed.",
+        "how": "Look at the top of window frames for a slot with a slider. Check it isn't painted or taped shut. Note rooms without them.",
+        "standard": "UK Government guidance: replacement windows are required to have trickle vents under building regulations, and they should be controllable by the occupant. Requirements differ in other countries.",
+        "tip": "Slide each vent open and closed to check it moves freely.",
+        "src": "Source: Beneath the Surface - Ventilation, Master Check (Trickle vents) · UK Gov Damp & Mould"
+      },
+      {
+        "zone": "Airflow",
+        "verb": "Look outside",
+        "title": "Are air bricks and underfloor vents clear?",
+        "prompt": "Low vents in outside walls need to stay <strong>uncovered</strong>.",
+        "yes": "Yes, all clear",
+        "no": "Covered, or didn't look",
+        "why": "Air bricks let air move under suspended floors. Raised soil, paving, plants or extensions can cover them.",
+        "how": "Walk round the outside and look at the base of the walls. Note any vents covered by soil, paths, decking, plants or new building work.",
+        "standard": "Checking air bricks are clear: professional practice.",
+        "tip": "Photograph each side of the house at ground level. It's a quick record of every vent.",
+        "src": "Source: Beneath the Surface - Ventilation, Air Sweep (Air bricks) · Professional practice"
+      },
+      {
+        "zone": "Airflow",
+        "verb": "Try it",
+        "title": "Does every room have a window that opens?",
+        "prompt": "Opening windows is the <strong>simplest</strong> way to bring in outdoor air.",
+        "yes": "Yes, all open",
+        "no": "Some don't, or didn't try",
+        "why": "Opening windows and doors increases the amount of outdoor air coming in.",
+        "how": "With permission, try a window in every room. Note any that are stuck, painted shut or missing a handle.",
+        "standard": "US EPA: opening windows and doors when the weather permits increases the outdoor ventilation rate.",
+        "tip": "Check for window keys. A locked window with no key is as good as a fixed one.",
+        "src": "Source: Beneath the Surface - Ventilation, Master Check (Windows open) · EPA Improving IAQ"
+      }
+    ]
+  },
+  "owner": {
+    "label": "Maintenance",
+    "ageRange": "Living in or looking after a home",
+    "accent": "#1D4ED8",
+    "accentDark": "#2D5B9A",
+    "checks": [
+      {
+        "zone": "Wet rooms",
+        "verb": "Think back",
+        "title": "Do you run the fan or open a window every time someone showers?",
+        "prompt": "Every shower, <strong>every time</strong>, keeps moisture from building up.",
+        "yes": "Yes, every time",
+        "no": "Not always",
+        "why": "Moisture from showers settles on cold surfaces as condensation if it can't escape.",
+        "how": "Switch the fan on before the shower and leave it running afterwards, or open the window. Keep the door closed so moisture doesn't spread.",
+        "standard": "US EPA: run the bathroom fan or open the window when showering. UK Government guidance: open windows wide after bathing.",
+        "tip": "Leave the fan running while you dry off and get dressed.",
+        "src": "Source: Beneath the Surface - Ventilation, Safe steps · EPA Mold & Moisture · UK Gov Damp & Mould"
+      },
+      {
+        "zone": "Wet rooms",
+        "verb": "Think back",
+        "title": "Do you use the extractor fan or open a window when cooking?",
+        "prompt": "Cooking and dishwashing put <strong>moisture and fumes</strong> into the air.",
+        "yes": "Yes, every time",
+        "no": "Not usually",
+        "why": "Extractor fans that vent outside remove moisture and cooking pollutants at the source.",
+        "how": "Switch the fan on when you start cooking, or open a window. Use pan lids to cut the steam.",
+        "standard": "US EPA: use exhaust fans or open windows whenever cooking, running the dishwasher or dishwashing. UK Government guidance: cook with pan lids on.",
+        "tip": "Put the lid on while bringing water to the boil. It's quicker too.",
+        "src": "Source: Beneath the Surface - Ventilation, Safe steps · EPA Mold & Moisture · UK Gov Damp & Mould"
+      },
+      {
+        "zone": "Measure",
+        "verb": "Go check",
+        "title": "Do you know your indoor humidity?",
+        "prompt": "EPA guidance: below 60%, <strong>ideally 30-50%</strong>.",
+        "yes": "Yes, it's in range",
+        "no": "No, or it's higher",
+        "why": "Humidity readings show whether moisture is building up before mould appears.",
+        "how": "Use a simple digital hygrometer. Check the main bedroom first thing in the morning and the bathroom after showers. Keep a note of readings.",
+        "standard": "US EPA: keep indoor humidity below 60 percent, ideally between 30 and 50 percent relative humidity.",
+        "tip": "Leave the hygrometer in one room for a few days before moving it. The pattern matters more than one reading.",
+        "src": "Source: Beneath the Surface - Ventilation, Humidity Log · EPA Mold & Moisture"
+      },
+      {
+        "zone": "Habits",
+        "verb": "Think back",
+        "title": "Do you dry laundry indoors with the windows closed?",
+        "prompt": "Wet washing releases <strong>a lot of moisture</strong> into the room.",
+        "yes": "No, outside or ventilated",
+        "no": "Yes, often",
+        "why": "Moisture from drying clothes stays in the home unless it has a way out.",
+        "how": "Dry washing outdoors when you can. Indoors, use a room with a window open or the fan running, and keep the door closed.",
+        "standard": "UK Government guidance: dry laundry outdoors if possible.",
+        "tip": "Use the bathroom with the fan on as your indoor drying room.",
+        "src": "Source: Beneath the Surface - Ventilation, Master Check (Laundry drying) · UK Gov Damp & Mould"
+      },
+      {
+        "zone": "Airflow",
+        "verb": "Go check",
+        "title": "Is there a gap between your furniture and the outside walls?",
+        "prompt": "Air needs <strong>room to move</strong> behind wardrobes and beds.",
+        "yes": "Yes, there's a gap",
+        "no": "No, it's tight",
+        "why": "Outside walls are colder. Air trapped behind furniture can't move, so condensation forms there.",
+        "how": "Pull large furniture on outside walls a little away from the wall so air can move behind it.",
+        "standard": "UK Government guidance: keep a gap between furniture and external walls.",
+        "tip": "A hand's width gap is easy to check without a tape measure.",
+        "src": "Source: Beneath the Surface - Ventilation, Master Check (Gap behind furniture) · UK Gov Damp & Mould"
+      },
+      {
+        "zone": "Radon",
+        "verb": "Think back",
+        "title": "Have you tested your home for radon?",
+        "prompt": "It's a natural gas you can't see or smell. <strong>A test is the only way to know.</strong>",
+        "yes": "Yes, with a result",
+        "no": "Not yet",
+        "why": "Radon can't be seen or smelled, so the only way to know your level is to measure it.",
+        "how": "Buy a long-term test kit from a recognised lab or your national radon programme. Place it in the lowest lived-in level for at least 3 months, then send it back for analysis.",
+        "standard": "WHO: measure over at least 3 months for an annual average. US EPA: fix at 4 pCi/L (about 150 Bq/m³) or higher; consider fixing between 2 and 4 pCi/L. National levels differ.",
+        "tip": "Write the start date on your calendar so you remember to send the kit back.",
+        "src": "Source: Beneath the Surface - Ventilation, Radon Test Record · WHO Radon · EPA Radon"
+      },
+      {
+        "zone": "Signs",
+        "verb": "Think back",
+        "title": "When you see condensation, do you wipe it away the same day?",
+        "prompt": "Water left on sills and frames <strong>soaks in</strong>.",
+        "yes": "Yes, straight away",
+        "no": "Not usually",
+        "why": "Condensation left to sit keeps surfaces damp.",
+        "how": "Wipe windows, sills and frames each morning, then open a window to let the moisture out. Note which rooms are worst.",
+        "standard": "US EPA: if you see condensation or moisture collecting on windows, walls or pipes, act quickly to dry the wet surface and reduce the moisture source.",
+        "tip": "Keep a small squeegee on the bedroom windowsill.",
+        "src": "Source: Beneath the Surface - Ventilation, Safe steps · EPA Mold & Moisture"
+      },
+      {
+        "zone": "Airflow",
+        "verb": "Go check",
+        "title": "Are your trickle vents open?",
+        "prompt": "They only work <strong>when they're open</strong>.",
+        "yes": "Yes, they're open",
+        "no": "Closed, or none",
+        "why": "Trickle vents let background air in even when windows are shut.",
+        "how": "Check the slider at the top of each window frame and open it. Consider the window vent position (partly open, locked) when you can.",
+        "standard": "UK Government guidance: trickle vents controllable by the occupant; keep windows in the vent position where feasible. Requirements differ by country.",
+        "tip": "Open them all on the same day you check your smoke alarms.",
+        "src": "Source: Beneath the Surface - Ventilation, Master Check (Trickle vents) · UK Gov Damp & Mould"
+      }
+    ]
+  }
+};
+const BRIDGE_STILL = {
+  "buyer": [
+    "<strong>The full 16-area Air Sweep</strong>: kitchen and bathroom extraction, dryer vents, windows, trickle vents, air bricks, roof space, mould and radon.",
+    "<strong>20 Master Checks</strong>, a humidity log, a radon test record, questions for the seller and a printable report."
+  ],
+  "owner": [
+    "<strong>A Humidity Log</strong> that flags readings above 60% or outside 30-50%, plus a Radon Test Record that compares your result with EPA and WHO levels.",
+    "<strong>20 Master Checks, a 16-area Air Sweep</strong>, 3-photo evidence, 13 cited safe steps and a printable report."
+  ]
+};
+const BEHAVIOUR_FIRST = {
+  "buyer": [0, 2, 1, 3],
+  "owner": [0, 1, 3, 6]
+};
+
+const STORE_KEY = 'snagtag-vent-air-check';
+let state = { idx:0, answers:[], started:false, product:null };
+let CHECKS = [];
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(raw){ const s = JSON.parse(raw); if(s && Array.isArray(s.answers)) state = s; }
+  }catch(e){}
+  if(state.product && PRODUCTS[state.product]) CHECKS = PRODUCTS[state.product].checks;
+  else state.product = null;
+}
+function saveState(){
+  try{ localStorage.setItem(STORE_KEY, JSON.stringify(state)); }catch(e){}
+}
+
+function hexToRgbStr(hex){
+  hex = hex.replace('#','');
+  const r = parseInt(hex.substring(0,2),16), g = parseInt(hex.substring(2,4),16), b = parseInt(hex.substring(4,6),16);
+  return r+','+g+','+b;
+}
+function applyProductTheme(key){
+  const p = PRODUCTS[key];
+  document.documentElement.style.setProperty('--accent', p.accent);
+  document.documentElement.style.setProperty('--accent-dark', p.accentDark);
+  document.documentElement.style.setProperty('--accent-rgb', hexToRgbStr(p.accent));
+}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('progressWrap').style.display = (id==='screen-check') ? 'block' : 'none';
+  window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+}
+
+document.querySelectorAll('.choose-card').forEach(card=>{
+  card.addEventListener('click', ()=>{
+    const key = card.getAttribute('data-key');
+    state = { idx:0, answers:[], started:true, product:key };
+    CHECKS = PRODUCTS[key].checks;
+    applyProductTheme(key);
+    saveState();
+    renderCheck(); show('screen-check');
+  });
+});
+
+function renderCheck(){
+  const i = state.idx;
+  const c = CHECKS[i];
+  document.getElementById('chkZone').textContent = c.zone;
+  document.getElementById('chkVerb').textContent = c.verb;
+  document.getElementById('chkTitle').textContent = c.title;
+  document.getElementById('chkPrompt').innerHTML = c.prompt;
+  document.getElementById('progressText').textContent = 'Check ' + (i+1) + ' of ' + CHECKS.length;
+  document.getElementById('progressPct').textContent = Math.round(((i)/CHECKS.length)*100) + '%';
+  document.getElementById('progressFill').style.width = ((i)/CHECKS.length*100) + '%';
+
+  const opts = document.getElementById('chkOpts');
+  opts.innerHTML = '';
+  const answered = state.answers[i] !== undefined && state.answers[i] !== null;
+
+  [['yes', c.yes, true], ['no', c.no, false]].forEach(([key,label,isSafe])=>{
+    const div = document.createElement('div');
+    div.className = 'opt';
+    div.setAttribute('role','button');
+    div.setAttribute('tabindex','0');
+    const isSelected = answered && state.answers[i] === isSafe;
+    div.innerHTML = '<span class="ic">'+(isSelected ? '✓' : '')+'</span><span>'+label+'</span>';
+    if(isSelected) div.classList.add('selected', isSafe ? 'safe':'flag');
+    const pick = ()=>{
+      state.answers[i] = isSafe;
+      saveState();
+      renderCheck();
+      applyReveal(c, isSafe);
+      document.getElementById('chkNavRow').style.display = 'flex';
+      document.getElementById('chkNextBtn').textContent = (i === CHECKS.length-1) ? 'See my results →' : 'Next check →';
+    };
+    div.addEventListener('click', pick);
+    div.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); pick(); } });
+    opts.appendChild(div);
+  });
+
+  const rv = document.getElementById('chkReveal');
+  if(answered){
+    applyReveal(c, state.answers[i]);
+    document.getElementById('chkNavRow').style.display = 'flex';
+    document.getElementById('chkNextBtn').textContent = (i === CHECKS.length-1) ? 'See my results →' : 'Next check →';
+  } else {
+    rv.classList.remove('show');
+    document.getElementById('chkNavRow').style.display = 'none';
+  }
+  document.getElementById('chkBackBtn').style.visibility = (i===0) ? 'hidden' : 'visible';
+}
+
+function applyReveal(c, isSafe){
+  const rv = document.getElementById('chkReveal');
+  rv.classList.add('show');
+  rv.classList.toggle('good', !!isSafe);
+  rv.classList.toggle('bad', !isSafe);
+  const kicker = document.getElementById('revealKicker');
+  const line1 = document.getElementById('revealWhy');
+  const line2 = document.getElementById('revealHow');
+  if(isSafe){
+    kicker.textContent = '✓ Good - that\'s sorted';
+    line1.textContent = 'That matches the guidance: ' + c.standard;
+    line2.textContent = c.tip;
+  } else {
+    kicker.textContent = '⚠ Worth fixing - here\'s why';
+    line1.textContent = c.why;
+    line2.textContent = c.how;
+  }
+  document.getElementById('revealSrc').textContent = c.src;
+}
+
+document.getElementById('chkNextBtn').addEventListener('click', ()=>{
+  if(state.idx < CHECKS.length-1){
+    state.idx++; saveState(); renderCheck(); show('screen-check');
+  } else {
+    document.getElementById('progressFill').style.width = '100%';
+    renderResult(); show('screen-result');
+  }
+});
+document.getElementById('chkBackBtn').addEventListener('click', ()=>{
+  if(state.idx>0){ state.idx--; saveState(); renderCheck(); show('screen-check'); }
+});
+document.getElementById('chkChooseBtn').addEventListener('click', ()=>{
+  state = { idx:0, answers:[], started:true, product:null };
+  saveState();
+  show('screen-choose');
+});
+
+document.getElementById('startBtn').addEventListener('click', ()=>{
+  state = { idx:0, answers:[], started:true, product:null }; saveState();
+  show('screen-choose');
+});
+document.getElementById('restartBtn').addEventListener('click', ()=>{
+  state = { idx:0, answers:[], started:true, product:null }; saveState();
+  show('screen-choose');
+});
+
+function escHtml(s){return String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+
+document.getElementById('saveResultsBtn').addEventListener('click', ()=>{
+  const p = PRODUCTS[state.product];
+  const safeItems = CHECKS.filter((c,i)=>state.answers[i]===true);
+  const flagItems = CHECKS.filter((c,i)=>state.answers[i]===false);
+  const dateStr = new Date().toLocaleDateString(undefined, {year:'numeric',month:'long',day:'numeric'});
+  const rowsFlag = flagItems.map(c=>'<div class="row flag"><strong>'+escHtml(c.title.replace(/\?$/,''))+'</strong><span>'+escHtml(c.how)+'</span><em>'+escHtml(c.src)+'</em></div>').join('') || '<p style="color:#6B7A93">Nothing flagged - every check today was already sorted.</p>';
+  const rowsSafe = safeItems.map(c=>'<div class="row safe"><strong>'+escHtml(c.title.replace(/\?$/,''))+'</strong><span>'+escHtml(c.tip)+'</span></div>').join('') || '<p style="color:#6B7A93">Nothing marked sorted yet.</p>';
+  const html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>My Ventilation and Indoor Air Check - '+dateStr+'</title>'
+    + '<style>body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;background:#F7FAFD;color:#16243F;max-width:640px;margin:0 auto;padding:32px 20px;line-height:1.6}'
+    + 'h1{font-size:1.5rem;margin:0 0 4px}p.sub{color:#6B7A93;margin:0 0 26px;font-size:14px}'
+    + 'h2{font-size:1rem;text-transform:uppercase;letter-spacing:.06em;color:#6B7A93;margin:26px 0 10px}'
+    + '.row{border-left:4px solid '+p.accent+';background:#fff;border-radius:0 10px 10px 0;padding:12px 16px;margin-bottom:10px}'
+    + '.row.safe{border-left-color:#2E7D4F}.row.flag{border-left-color:#A15C00}'
+    + '.row strong{display:block;font-size:14.5px;margin-bottom:3px}.row span{font-size:13.5px;color:#44546F;display:block}.row em{font-size:12px;color:#6B7A93;display:block;margin-top:4px}'
+    + '.cta{display:inline-block;margin-top:22px;background:linear-gradient(135deg,'+p.accent+','+p.accentDark+');color:#fff;font-weight:700;padding:13px 20px;border-radius:10px;text-decoration:none}'
+    + 'footer{margin-top:30px;padding-top:16px;border-top:1px solid #C9D6E8;font-size:11.5px;color:#6B7A93}</style></head><body>'
+    + '<h1>My Ventilation &amp; Indoor Air Check: ' + p.label + '</h1><p class="sub">Saved '+dateStr+' &middot; Beneath the Surface by The Snag Tag</p>'
+    + '<h2>Check today</h2>' + rowsFlag
+    + '<h2>Already sorted</h2>' + rowsSafe
+    + '<a class="cta" href="'+GUMROAD_URL+'" target="_blank" rel="noopener">Get the complete Ventilation &amp; Indoor Air tool &rarr;</a>'
+    + '<footer>Educational general guidance from The Snag Tag, a NEBOSH &amp; OSHA trained HSE professional. Not a ventilation survey. Saved locally to your device; nothing was sent anywhere.</footer>'
+    + '</body></html>';
+  const blob = new Blob([html], {type:'text/html'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'vent-air-check-' + state.product + '-results.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 2000);
+});
+
+function renderResult(){
+  const p = PRODUCTS[state.product];
+  const total = CHECKS.length;
+  const safeCount = state.answers.filter(a=>a===true).length;
+  const flagCount = state.answers.filter(a=>a===false).length;
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statSafe').textContent = safeCount;
+  document.getElementById('statFlag').textContent = flagCount;
+
+  document.getElementById('resultHeadline').textContent =
+    flagCount === 0 ? total + ' for ' + total + ' - genuinely well done' :
+    flagCount <= 2 ? 'Close. A couple of things to look at' :
+    'You just found real gaps';
+
+  const zones = {};
+  CHECKS.forEach((c,i)=>{
+    if(!zones[c.zone]) zones[c.zone] = {safe:0,total:0};
+    zones[c.zone].total++;
+    if(state.answers[i]===true) zones[c.zone].safe++;
+  });
+  const zb = document.getElementById('zoneBars');
+  zb.innerHTML = '';
+  Object.keys(zones).forEach(z=>{
+    const d = zones[z];
+    const pct = Math.round((d.safe/d.total)*100);
+    const row = document.createElement('div');
+    row.className = 'zbar-row';
+    row.innerHTML = '<div class="zbar-label">'+z+'</div><div class="zbar-track"><div class="zbar-fill'+(pct<100?' partial':'')+'" style="width:'+pct+'%"></div></div><div class="zbar-count">'+d.safe+'/'+d.total+'</div>';
+    zb.appendChild(row);
+  });
+
+  const flagWrap = document.getElementById('findingsFlag');
+  const safeWrap = document.getElementById('findingsSafe');
+  flagWrap.innerHTML = ''; safeWrap.innerHTML = '';
+  if(flagCount===0){
+    flagWrap.innerHTML = '<p style="font-size:14px;color:var(--ink-soft)">Nothing flagged today - see the sorted list below.</p>';
+  }
+  CHECKS.forEach((c,i)=>{
+    const isSafe = state.answers[i]===true;
+    const div = document.createElement('div');
+    div.className = 'finding ' + (isSafe?'safe':'flag');
+    div.innerHTML = '<div class="fic">'+(isSafe?'✓':'!')+'</div><div><div class="ft">'+c.title.replace(/\?$/,'')+'</div><div class="fd">'+(isSafe? 'Sorted - keep it that way.' : c.how)+'</div></div>';
+    (isSafe ? safeWrap : flagWrap).appendChild(div);
+  });
+
+  const behaviourFirst = BEHAVIOUR_FIRST[state.product] || [];
+  let qwIndex = behaviourFirst.find(i => state.answers[i]===false);
+  if(qwIndex === undefined) qwIndex = CHECKS.findIndex((c,i)=>state.answers[i]===false);
+  if(qwIndex === undefined || qwIndex === -1) qwIndex = 1;
+  const qw = CHECKS[qwIndex];
+  document.getElementById('qwTitle').textContent = qw.title.replace(/\?$/,'');
+  document.getElementById('qwBody').textContent = qw.how;
+
+  const bridgeBody = flagCount === 0
+    ? 'You\'re sorted on all ' + total + ' of today\'s checks. The full Beneath the Surface Ventilation & Indoor Air tool goes much further: a 16-area air sweep, a humidity log, a radon test record, a findings register with photo evidence and a printable report.'
+    : 'Today\'s check found ' + flagCount + ' of the most commonly missed ventilation gaps. The full Beneath the Surface Ventilation & Indoor Air tool helps you log humidity room by room, record radon results, and track each issue until it is put right.';
+  document.getElementById('bridgeBody').textContent = bridgeBody;
+
+  const stillItems = BRIDGE_STILL[state.product] || [];
+  document.getElementById('bridgeStillList').innerHTML = stillItems.map(li=>'<li>'+li+'</li>').join('');
+
+  document.getElementById('proBtn').href = GUMROAD_URL;
+  document.getElementById('proBtn').textContent = 'Get the Ventilation & Indoor Air tool →';
+}
+
+function applyMode(m){
+  document.body.setAttribute('data-mode', m);
+  document.getElementById('modeToggle').textContent = m==='dark' ? '☀️' : '🌙';
+  try{ localStorage.setItem(STORE_KEY+'-mode', m); }catch(e){}
+}
+document.getElementById('modeToggle').addEventListener('click', ()=>{
+  applyMode(document.body.getAttribute('data-mode')==='dark' ? 'light' : 'dark');
+});
+(function initMode(){
+  let m = 'light';
+  try{ m = localStorage.getItem(STORE_KEY+'-mode') || 'light'; }catch(e){}
+  applyMode(m);
+})();
+
+loadState();
+if(state.product) applyProductTheme(state.product);
+if(state.started && state.product && state.idx < CHECKS.length && !(state.answers.length===CHECKS.length && state.answers.every(a=>a!==undefined && a!==null))){
+  renderCheck(); show('screen-check');
+} else if(state.started && state.product && state.answers.length===CHECKS.length && state.answers.every(a=>a!==undefined && a!==null)){
+  renderResult(); show('screen-result');
+} else if(state.started && !state.product){
+  show('screen-choose');
+}
+</script>
+</body>
+</html>
